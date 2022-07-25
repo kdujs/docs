@@ -6,7 +6,9 @@
     "dev": "witepress",
     "build": "witepress build",
     "serve": "witepress serve",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "predeploy": "npm run build",
+    "deploy": "firebase deploy"
   },
   "dependencies": {
     "@kdujs/repl": "^1.2.4-alpha.0",
