@@ -1,0 +1,10 @@
+<form @submit.prevent="addTodo">
+  <input k-model="newTodo">
+  <button>Add Todo</button>    
+</form>
+<ul>
+  <li k-for="todo in todos" :key="todo.id">
+    {{ todo.text }}
+    <button @click="removeTodo(todo)">X</button>
+  </li>
+</ul>

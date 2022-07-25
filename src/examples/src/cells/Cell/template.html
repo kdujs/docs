@@ -1,0 +1,10 @@
+<div class="cell" :title="cells[c][r]" @click="editing = true">
+  <input
+    k-if="editing"
+    :value="cells[c][r]"
+    @change="update"
+    @blur="update"
+    @knode-mounted="({ el }) => el.focus()"
+  >
+  <span k-else>{{ evalCell(cells[c][r]) }}</span>
+</div>

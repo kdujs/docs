@@ -1,0 +1,24 @@
+[
+  {
+    "name": "NKDuy",
+    "title": "Creator",
+    "company": "Kdu.js",
+    "companyLink": "https://kdu-js.web.app",
+    "projects": [
+      {
+        "label": "kdujs",
+        "url": "https://www.github.com/kdujs"
+      }
+    ],
+    "location": "Vietnam",
+    "languages": ["English", "Vietnamese"],
+    "website": {
+      "label": "nkduy-cloud",
+      "url": "https://nkduy-cloud.web.app"
+    },
+    "socials": {
+      "github": "khanhduy1407"
+    },
+    "sponsor": false
+  }
+]

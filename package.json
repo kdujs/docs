@@ -1,0 +1,33 @@
+{
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "dev": "witepress",
+    "build": "witepress build",
+    "serve": "witepress serve",
+    "preinstall": "npx only-allow pnpm"
+  },
+  "dependencies": {
+    "@kdujs/repl": "^1.2.4-alpha.0",
+    "@kdujs/theme": "^1.0.4-alpha.4",
+    "dynamics.js": "^1.1.5",
+    "gsap": "^3.9.0",
+    "kdu": "^3.2.37-alpha.1",
+    "witepress": "^0.22.4-beta.1"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^12.2.3",
+    "@types/node": "^16.9.1"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@algolia/client-search",
+        "react",
+        "react-dom",
+        "@types/react"
+      ]
+    }
+  }
+}

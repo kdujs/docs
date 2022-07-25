@@ -1,0 +1,110 @@
+<script setup>
+import dynamics from 'dynamics.js'
+
+const headerHeight = 120
+
+let isDragging = false
+const start = { x: 0, y: 0 }
+let c = $ref({ x: headerHeight, y: headerHeight })
+
+const headerPath = $computed(() => {
+  return `M0,0 L320,0 320,${headerHeight}Q${c.x},${c.y} 0,${headerHeight}`
+})
+
+const contentPosition = $computed(() => {
+  const dy = c.y - headerHeight
+  const dampen = dy > 0 ? 2 : 4
+  return {
+    transform: `translate(0,${dy / dampen}px)`
+  }
+})
+
+function startDrag(e) {
+  e = e.changedTouches ? e.changedTouches[0] : e
+  isDragging = true
+  start.x = e.pageX
+  start.y = e.pageY
+}
+
+function onDrag(e) {
+  e = e.changedTouches ? e.changedTouches[0] : e
+  if (isDragging) {
+    c.x = headerHeight + (e.pageX - start.x)
+    const dy = e.pageY - start.y
+    const dampen = dy > 0 ? 1.5 : 4
+    c.y = headerHeight + dy / dampen
+  }
+}
+
+function stopDrag() {
+  if (isDragging) {
+    isDragging = false
+    dynamics.animate(
+      c,
+      { x: headerHeight, y: headerHeight },
+      { type: dynamics.spring, duration: 700, firction: 280 }
+    )
+  }
+}
+</script>
+
+<template>
+  <div
+    class="draggable"
+    @mousedown="startDrag"
+    @mousemove="onDrag"
+    @mouseup="stopDrag"
+    @mouseleave="stopDrag"
+    @touchstart.prevent="startDrag"
+    @touchmove.prevent="onDrag"
+    @touchend.prevent="stopDrag"
+  >
+    <svg class="bg" width="320" height="560">
+      <path :d="headerPath" fill="#03a9f4"></path>
+    </svg>
+    <div class="header">Drag Me</div>
+    <div class="content" :style="contentPosition">
+      <a
+        href="https://kdujs-sfc.web.app/#eNqlVm1v2zYQ/isHN0AdLJLtvHSd5mQbsA/9sAIdsA8b5gGhRUpWI5EESSV2Av/3PSQl23LcokCBwBGfu3vueG/Sy+g3rdMH3o6y0dzmptKOrHCtvlvIqtHKOOIbyZoqt1QY1dDb/ph+tm8XciFzJa2jlWBcmA+iKleObml2OfWyWjiq7O+GlWUlS+AFq63obaxjoL+lF1pnNL2gDX5pG61y4GdGFOMgPGQPegN32/PjOD4xt/IEuWp06wQfj8/p9o5eFpLI4HZG0v3H6cWU/ri69P/879nLIen2z7OXPF1vAefpZovwjuT3C3noF79OSPdJ2cpVSn7JeVTmG8hBS8ngIgcKrNHCk0DzDkn5hS4po+uD8AMbkTNM2kKZJqP78FwzJ8Y+WFhOOp6tXp8jXPK5jTEXrcxDmKEEvj5jcR45BbyKNF8xWQr+l2rzlbDwfwz9O/0PEaGUNCywM20AA3G6DmSaleLvPegvH8F/EM8gHCW/N5aCxvt4OhpkNUQyaJofaNxFhip00SI3QXtfpC7OncpmoPGqSrP0pq+Td+oZjpwelKWvyFFBlA456GL/woVODZXHd8PJML2+FSKMYC76p28ZqANlt9Ei2/NabeD0gnhrmA84ox+nGN2iMiH+jC7fhxn2xiGd8YbzSdwt2Co4ONFo36g4Ec159dglrGbW3i5G3F+NLWuxGEXBr41qreDqSUK6a9md1Pk2CPBJcTBu1KOANDbY0PK0KFi1OjDGkgythOSnZMGsFixQDqXhtrivfSx3V11CRk8VdyscsIVwWoUa4HjzDsfOCGba77TMO93vOKgXVV0DezO9Yj8V1zCYT7xm72wCb/0zEr1zHDmg7uOjj2I+gfSUYrfY4CmzblP7ax3tOpB8EHWt9hT903xyUGkcAwHZXGnBgaS7Qse2XrL8oTSqlTzJVa1MRm+Kovg5iNQ6sSuGFvDviGu9ptk7/JhyybDt/MvD/6Wzm/OgHjKa+bWu1wGISUV3XvcIim6K2vOtKs6FDGDDDGYKhtAi1joVUN1dNMPyxWWqRxFgJ9YuYXVVQpAjH8IEuEB2Els9Y2pmCHSPPXUxXE2nAUSjmMQ3Sw5QKhlZl8qgMIlhvGptRu8DAyYoXZYxS/to2NKqGm+YGI3SSE14rEUBxvj8nFSSC/9+7Whi4THgaVfGY9bBHXfms5gJxjnGPyZoX5jqOYBd6IAGvvo337CifUXwpXCYpJi4S9G8zttS1TwSo6t9J6GFRhej+JWSNEzji0RJfMcEf4tOYBejrN+aWC37jxePYw6c0zabTHIuU/uw0WjBlIvHyUCxW4eLEb6ThmYAPtvEFnn6JJYp09ojqWmlqxqRCtskS6OeUOhXPBOAaMHEYJEI40fx67xH6q+4+1072v4PFF5E1Q=="
+        target="_blank"
+        >Source code</a
+      >
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.draggable {
+  background-color: #fff;
+  box-shadow: var(--kt-shadow-2);
+  width: 320px;
+  height: 240px;
+  overflow: hidden;
+  margin: 30px auto;
+  position: relative;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 300;
+  user-select: none;
+  border-radius: 8px;
+}
+.bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+.header,
+.content {
+  position: relative;
+  z-index: 1;
+  padding: 30px;
+  box-sizing: border-box;
+}
+.header {
+  color: #fff;
+  height: 120px;
+  font-size: 2em;
+  font-weight: bold;
+}
+</style>

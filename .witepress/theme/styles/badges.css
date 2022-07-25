@@ -1,0 +1,28 @@
+.kt-badge.wp:before {
+  content: 'WP';
+}
+
+.kt-badge.ts {
+  background-color: #3178c6;
+}
+.kt-badge.ts:before {
+  content: 'TS';
+}
+
+.kt-badge.dev-only,
+.kt-badge.experimental {
+  color: var(--kt-c-text-light-1);
+  background-color: var(--kt-c-yellow);
+}
+
+.kt-badge.dev-only:before {
+  content: 'Dev only';
+}
+
+.kt-badge.experimental:before {
+  content: 'Experimental';
+}
+
+.kt-badge[data-text]:before {
+  content: attr(data-text);
+}
