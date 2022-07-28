@@ -41,6 +41,10 @@ If you are unsure about an option, simply choose `No` by hitting enter for now. 
 <span class="line"><span style="color:var(--kt-c-blue);">&gt; </span><span style="color:#A6ACCD;">npm run dev</span></span>
 <span class="line"></span></code></pre></div>
 
+::: warning
+If you get `npm install` error after using `npm init kdu@3`, [see here](https://github.com/KduJS/rfcs/discussions/2).
+:::
+
 You should now have your first Kdu project running! Note that the example components in the generated project are written using the [Composition API](/guide/introduction.html#composition-api) and `<script setup>`, rather than the [Options API](/guide/introduction.html#options-api). Here are some additional tips:
 
 - The recommended IDE setup is [Visual Studio Code](https://code.visualstudio.com/) + [Kocan extension](https://marketplace.visualstudio.com/items?itemName=Kdu-Code.kocan). If you use other editors, check out the [IDE support section](/guide/scaling-up/tooling.html#ide-support).
