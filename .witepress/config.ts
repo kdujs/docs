@@ -14,6 +14,7 @@ const nav = [
       { text: 'Tutorial', link: '/tutorial/' },
       { text: 'Examples', link: '/examples/' },
       { text: 'Quick Start', link: '/guide/quick-start' },
+      { text: 'Docs v2', link: 'https://kdujs-v2.web.app/' },
       // { text: 'Style Guide', link: '/style-guide/' },
     ]
   },
